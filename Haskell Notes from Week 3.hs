@@ -159,3 +159,14 @@ positions x xs = [i | (x', i) <- zip xs [0..n], x == x']
 
 
  
+ {-
+ A function without Recursion
+ - Many functions can naturally be defined in terms of other functions (1)
+ 
+ 
+ 
+ 
+ -}
+
+ factorial :: Int -> Int {-1-}
+ factorial n = product [1..n]
