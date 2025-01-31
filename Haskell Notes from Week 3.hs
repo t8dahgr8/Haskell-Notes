@@ -160,11 +160,12 @@ positions x xs = [i | (x', i) <- zip xs [0..n], x == x']
 
  
  {- Recursive functions
- A function without Recursion
+ 
  - Many functions can naturally be defined in terms of other functions (1)
  - Some functions can be defined in terms of themselves, this is known as recursive
  - Recursive functions diverge for non-positive numbers (negative numbers). 
- -Lists have naturally a recursive structure. Thus recursion is used to define functions on lists
+ - Lists have naturally a recursive structure. Thus recursion is used to define functions on lists 
+ - Functions with more thatn one argument can also be defined using recursion
  
  
  
@@ -175,3 +176,11 @@ positions x xs = [i | (x', i) <- zip xs [0..n], x == x']
 
  factorial 0 = 1;
  factorial n = n * factorial(n-1)
+
+ product :: [Int] -> Int
+ product [] = 1
+ product (n:ns) = n * product ns
+
+ reverse :: [a] -> [a]
+ reverse [] = []
+ reverse (x:xs) = reverse xs ++ [x]
