@@ -78,10 +78,84 @@ which is same as
 
  add = \x -> (\y -> x + y)
  square = \x -> x * x
+-}
+
+
+{-
+Let and Where 
+-The let and where clasues are used to create a local scope within a function
+-Let-in is a expression, but where block is a block
+EX:
+-}
+
+let x = 3 in 2 * x {- Will return 6-}
+
+y = 2 * x where x = 3 {-Valid but won't return anything, you need to call y-}
+y {- Will print 6-}
+
+let {a=2; b = 7} in a + b {- Will return 9-}
+z = a + b where {a=2; b = 7} 
+z {returns 9}
+
+[let c = 5 in 5 * c, let d = 6 in d +9] {-Will return the list [10,9]-}
+[let c = 5 in 5 * c, let d = 6 in c*3 + d] {-Will return an error, because we cannot use c out of scope-}
 
 
 
 
 
+{-
+Operator Sections
+An operator written between its two arguments can be converted into a curried function written before its two argumetns by using parenthesis
+
+The convention also allwos one of the arguments of the operator to be included in the parenthesis
+
+-Sections can be used liked curried functions
+-}
+
+{-All will return 3-}
+1 + 2 
+(+) 1 2
+(1+) 2
+
+
+
+
+
+{-Video 2: List Comprehension
+
+- Convenient syntax for defining lists
+- Set comprehension - In math, the comprehension notation can be used to construct new sets from old sets 
+- Generators: The expression " x <-[1...10] " is called a generator, as it states how to generate values for x
+-Dependant Generators: Later generatros can depend on the variables that are introduced by earlier generators
+[(x, y) | x <- [1..3], y <- [x..3]]
+
+
+- Using a dependant generator, we can define the library function that concatenates a list of lists. 
+concat :: [[a]] -> [a]
+concat xss = [x | xs <- xss, x <- xs]
+
+
+
+-List comprehensions can use guards to restruct the values produced by earlier generators
+[x | x <- [1..10], even x] {-Only get the x's that are even-}
 
 -}
+
+
+{-
+Zip Function:
+A useful library function is zip, which maps two lists to a list of pairs of their corresponding elements
+-Using zip we can define a function that returns the list of ALL positions of a value in a list (second code)
+-}
+zip :: [a] -> [b] -> [(a, b)]
+zip ['a', 'b', 'c'] [1, 2, 3, 4] will produce [('a', 1), ('b', 2), ('c', 3)] 
+
+
+
+positions :: Eq a => a -> [a] -> [Int]
+positions x xs = [i | (x', i) <- zip xs [0..n], x == x']
+                 where n = length xs - 1
+
+
+ 
